@@ -22,3 +22,5 @@ class RedisDb():
 
 
 redis_db = RedisDb(REDIS_HOST, REDIS_PORT, REDIS_PASSWD)
+
+print(redis_db)

@@ -1,4 +1,6 @@
 import pymysql
+
+from common.logger import logger
 from config.setting import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWD, MYSQL_DB
 
 class MysqlDb():
@@ -24,6 +26,7 @@ class MysqlDb():
 
     def select_db(self, sql):
         """查询"""
+        logger.debug(f"执行的sql：{sql}")
         # 检查连接是否断开，如果断开就进行重连
         self.conn.ping(reconnect=True)
         # 使用 execute() 执行sql
@@ -34,6 +37,8 @@ class MysqlDb():
 
     def execute_db(self, sql):
         """更新/新增/删除"""
+        logger.debug(f"执行的sql：{sql}")
+
         try:
             # 检查连接是否断开，如果断开就进行重连
             self.conn.ping(reconnect=True)
@@ -47,3 +52,5 @@ class MysqlDb():
             self.conn.rollback()
 
 db = MysqlDb(MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWD, MYSQL_DB)
+
+print(db)
